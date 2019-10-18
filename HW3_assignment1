@@ -1,0 +1,13 @@
+CSS selectors for registration page:
+
+Amazon logo, $$("i.a-icon a-icon-logo")
+Create account, $$("h1.a-spacing-small")
+Your name input field, $$("input#ap_customer_name")
+Email input field, $$("input#ap_email")
+Password input field, $$("input#ap_password")
+Information about password minimum requirements, $$("div.a-icon a-icon-alert")
+Re-enter password field, $$("input#ap_password_check")
+Create your Amazon account button, $$("input#continue")
+Conditions of use link, $$("a[href*='condition_of_use']")
+Privacy notice link, $$("a[href*='ap_register_notification_privacy_notice']")
+Sign-In link, $$("a[href*='/ap/signin']")
