@@ -7,11 +7,16 @@ SEARCH_INPUT = (By.NAME, 'q')
 SEARCH_SUBMIT = (By.NAME, 'btnK')
 RESULTS_FOUND_MESSAGE = (By.XPATH, "//div[contains(@class,'commercial-unit-desktop-top')]")
 RESULTS = (By.XPATH, "//div[@class='g']")
+NUMBER_OF_BOXES = (By.XPATH, "//div[contains(@class, 'a-section benefit-box benefit-box')]")
 
 
 @given('Open Google page')
 def open_google(context):
     context.driver.get('https://www.google.com/')
+
+@given('Open Amazon Prime page')
+def open_prime(context):
+    context.driver.get('https://www.amazon.com/amazonprime/')
 
 
 @when('Input {search_word} into search field')
@@ -39,3 +44,13 @@ def verify_first_result(context, search_word):
     first_result = context.driver.find_element(*RESULTS).text
     print('\n{}'.format(first_result))
     assert search_word in first_result, "Expected word '{}' in message, but got '{}'".format(search_word, first_result)
+
+
+#HW4 function to verify that Amazon prime page has 8 boxes
+@then('Amazon Prime page has 8 boxes')
+def verify_number_of_boxes(context):
+    sleep(2)
+    assert len(context.driver.find_elements(*NUMBER_OF_BOXES)) == 8, \
+        f'Expected 8 items but got {len(context.driver.find_elements(*NUMBER_OF_BOXES))}'
+
+
