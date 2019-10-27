@@ -9,6 +9,9 @@ RESULTS_FOUND_MESSAGE = (By.XPATH, "//div[contains(@class,'commercial-unit-deskt
 RESULTS = (By.XPATH, "//div[@class='g']")
 NUMBER_OF_BOXES = (By.XPATH, "//div[contains(@class, 'a-section benefit-box benefit-box')]")
 
+COLOR_OPTIONS = (By.CSS_SELECTOR, 'div#variation_color_name li')
+SELECTED_COLOR = (By.CSS_SELECTOR, 'div#variation_color_name span.selection')
+
 
 @given('Open Google page')
 def open_google(context):
@@ -17,6 +20,7 @@ def open_google(context):
 @given('Open Amazon Prime page')
 def open_prime(context):
     context.driver.get('https://www.amazon.com/amazonprime/')
+
 
 
 @when('Input {search_word} into search field')
@@ -49,8 +53,8 @@ def verify_first_result(context, search_word):
 #HW4 function to verify that Amazon prime page has 8 boxes
 @then('Amazon Prime page has 8 boxes')
 def verify_number_of_boxes(context):
-    sleep(2)
     assert len(context.driver.find_elements(*NUMBER_OF_BOXES)) == 8, \
         f'Expected 8 items but got {len(context.driver.find_elements(*NUMBER_OF_BOXES))}'
+
 
 
