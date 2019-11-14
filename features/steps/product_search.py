@@ -8,28 +8,29 @@ SEARCH_SUBMIT = (By.NAME, 'btnK')
 RESULTS_FOUND_MESSAGE = (By.XPATH, "//div[contains(@class,'commercial-unit-desktop-top')]")
 RESULTS = (By.XPATH, "//div[@class='g']")
 NUMBER_OF_BOXES = (By.XPATH, "//div[contains(@class, 'a-section benefit-box benefit-box')]")
-
 COLOR_OPTIONS = (By.CSS_SELECTOR, 'div#variation_color_name li')
 SELECTED_COLOR = (By.CSS_SELECTOR, 'div#variation_color_name span.selection')
+PRODUCT_RESULTS = (By.XPATH, "//li[@role='listitem']//a[.//span[@class='a-price']]")
+TOOLBAR_TEXT_BOLD = (By.CSS_SELECTOR, "h1 span.a-text-bold")
 
 
 @given('Open Google page')
 def open_google(context):
     context.driver.get('https://www.google.com/')
 
+
 @given('Open Amazon Prime page')
 def open_prime(context):
     context.driver.get('https://www.amazon.com/amazonprime/')
 
 
-
 @when('Input {search_word} into search field')
 def input_search(context, search_word):
-    search = context.driver.find_element(*SEARCH_INPUT)
-    search.clear()
-    search.send_keys(search_word)
-    sleep(4)
-
+    # search = context.driver.find_element(*SEARCH_INPUT)
+    # search.clear()
+    # search.send_keys(search_word)
+    # sleep(4)
+    context.app.main_page.search_for_keyword(search_word)
 
 @when('Click on search icon')
 def click_search_icon(context):
@@ -57,4 +58,8 @@ def verify_number_of_boxes(context):
         f'Expected 8 items but got {len(context.driver.find_elements(*NUMBER_OF_BOXES))}'
 
 
-
+@then('Search results for {product} is visible')
+def verify_result(context, product):
+    # result_text = context.driver.find_element(*TOOLBAR_TEXT_BOLD).text
+    # assert result_text == product, f"Expected text is {product}, but got {result_text}"
+    context.app.search_results_page.verify_result_shown(product)

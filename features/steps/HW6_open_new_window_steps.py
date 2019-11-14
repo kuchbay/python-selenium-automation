@@ -10,6 +10,7 @@ FIRST_PRODUCT_TO_ADD_TO_CART = (By.CSS_SELECTOR, "img.oct-acs-asin-image.oct-dlp
 ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, "#add-to-cart-button")
 CARD_ITEM_COUNT = (By.ID, 'nav-cart-count')
 
+
 @when('Store original windows')
 def store_current_windows(context):
     original_window = context.driver.current_window_handle
@@ -27,6 +28,7 @@ def switch_to_new_window(context):
     current_windows = context.driver.window_handles
     new_window = current_windows[1]
     context.driver.switch_to_window(new_window)
+
 
 @when('Click to add a product from deals to cart')
 def add_product_from_deals_to_cart(context):
@@ -47,6 +49,7 @@ def close_current_window_and_switch_to_original(context):
 def refresh_page(context):
     context.driver.refresh()
     sleep(1)
+
 
 @then("{expected_header} is shown")
 def header_is_correct(context, expected_header):
